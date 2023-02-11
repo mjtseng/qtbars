@@ -40,6 +40,10 @@ class Window(QDialog):
 		self.button = QPushButton('Plot')
 		self.button.clicked.connect(self.plot)
 
+		# Another button to clear all numerical inputs
+		self.button2 = QPushButton("Clear")
+		self.button2.clicked.connect(self.clearNumbers)
+
 		# set the layout
 		beegLayout = QHBoxLayout()
 		
@@ -60,6 +64,9 @@ class Window(QDialog):
 		rightLayout.addLayout(courseLayout)
 
 		rightLayout.addWidget(self.button)
+		rightLayout.addWidget(self.button2)
+		# "Plot" button is first, so pressing enter after inputting numbers will plot
+
 		beegLayout.addLayout(rightLayout)
 		
 		self.setLayout(beegLayout)
@@ -123,6 +130,10 @@ class Window(QDialog):
 		ax.set_title('Progress bars - {}'.format(datetime.datetime.now().strftime('%d %b')))
 
 		self.canvas.draw()
+
+	def clearNumbers(self):
+		for i in range(entriesNo):
+			inputBoxes[i].clear()
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
